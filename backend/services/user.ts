@@ -1,6 +1,6 @@
-import { Teacher } from "../../api-types";
+import { User } from "../../api-types";
 
-const DB: Teacher[] = [];
+const DB: User[] = [];
 
 export const index = () => {
     return DB;
@@ -10,11 +10,11 @@ export const view = (id: string) => {
     return DB.find((el) => el._id === id);
 };
 
-export const add = (teacher: Teacher) => {
+export const add = (teacher: User) => {
     DB.push(teacher);
 };
 
-export const edit = (teacher: Teacher) => {
+export const edit = (teacher: User) => {
     const document = DB.find((el) => el._id === teacher._id);
     
     if(!document){
