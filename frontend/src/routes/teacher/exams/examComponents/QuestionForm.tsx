@@ -22,12 +22,19 @@ export const QuestionForm: React.FC<QuestionComponentProps> = ({
   question = {
     text: "",
     questionType: QuestionType.SINGLE_CHOICE,
+<<<<<<< Updated upstream
   }as Question,
+=======
+  } as Question,
+>>>>>>> Stashed changes
 }) => {
   const [questionState, setQuestionState] = useState<Question>(question);
   const setQuestionText = (text: string) =>
     setQuestionState((state) => ({ ...state, text: text }));
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
   const [answers, setAnswers] = useState<Answer[]>(question?.answers || [
     { answer: "", isCorrect: false },
     { answer: "", isCorrect: false },

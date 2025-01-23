@@ -5,6 +5,7 @@ import React from "react";
 import { Question } from "../../../../../../api-types";
 import { QuestionForm } from "./QuestionForm";
 
+<<<<<<< Updated upstream
 export const QuestionView: React.FC<{
   question: Question;
   index: number;
@@ -29,11 +30,34 @@ export const QuestionView: React.FC<{
     <QuestionForm saveQuestion={handleSave} question={question} />
   ) : (
     //se siamo in editing, quindi abbiamo cliccato sul bottone modifica, mostra il form per modificare, altrimenti mostra tutte le domande
+=======
+export const QuestionView: React.FC<{ 
+  question: Question; 
+  index: number 
+  onSave: (index: number, question: Question) => void
+}> = ({
+  question,
+  index,
+  onSave,
+}) => {
+  const[editing, setEditing] = React.useState(false);
+  const handleSave = (question: Question) => {
+    onSave(index, question);
+    setEditing(false);
+  }
+
+  return editing 
+  ? <QuestionForm 
+  saveQuestion={ handleSave} 
+  question={question}/> 
+  : (
+>>>>>>> Stashed changes
     <Card>
       <Stack direction={"row"} justifyContent={"space-between"}>
         <Typography>
           {index + 1}) {question.text || "Domanda vuota"}
         </Typography>
+<<<<<<< Updated upstream
         <Stack direction="row" spacing={2} justifyContent={"flex-end"}>
           <Button
             disabled={isEditingQuestion !== false}
@@ -58,6 +82,11 @@ export const QuestionView: React.FC<{
             Elimina
           </Button>
         </Stack>
+=======
+        <Button endDecorator={<EditIcon />} onClick={()=>{setEditing(!editing)}} size="sm">
+          Modifica
+        </Button>
+>>>>>>> Stashed changes
       </Stack>
       <ul>
         {question.answers.map(({ answer, isCorrect }, i) => (

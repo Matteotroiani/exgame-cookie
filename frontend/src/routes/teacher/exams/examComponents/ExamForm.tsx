@@ -42,6 +42,7 @@ export const ExamForm: React.FC<TExamForm> = ({
 
   const editQuestion = (index: number, newQuestion: Question) => {
     setQuestions((questions) => {
+<<<<<<< Updated upstream
       const newQuestions = [...questions]; //newQuestions è la copia dell'array questions
       newQuestions[index] = newQuestion; //sostituisco la domanda all'indice x(quella che voglio modificare) con la domanda nuova che ho modificato
       return newQuestions;
@@ -54,6 +55,13 @@ export const ExamForm: React.FC<TExamForm> = ({
       return newQuestions;
     });
   };
+=======
+      const newQuestions = [...questions];
+      newQuestions[index] = newQuestion;
+      return newQuestions;
+    });
+  }
+>>>>>>> Stashed changes
 
   const toggleQuestionForm = () => {
     setShowQuestionForm(true); // Mostra il form per l'aggiunta di una nuova domanda
@@ -97,6 +105,7 @@ export const ExamForm: React.FC<TExamForm> = ({
         <Typography level="h4">Questionario</Typography>
         <Stack spacing={2}>
           {questions.map((question, index) => (
+<<<<<<< Updated upstream
             <QuestionView
               key={index}
               question={question}
@@ -106,11 +115,18 @@ export const ExamForm: React.FC<TExamForm> = ({
               isEditingQuestion={isEditingQuestion}
               setIsEditingQuestion={setIsEditingQuestion}
             />
+=======
+            <QuestionView key={index} question={question} onSave={editQuestion} index={index} />
+>>>>>>> Stashed changes
           ))}
           <Divider />
         </Stack>
 
+<<<<<<< Updated upstream
         {showQuestionForm ? ( //se la variabile show question form è true, mostro il form per aggiungere una domanda, altrimenti mostro il bottone "aggiungi domanda" che metterà la variavile precedente a true, mostrando il form
+=======
+        {showQuestionForm ? (
+>>>>>>> Stashed changes
           <QuestionForm saveQuestion={addQuestionToExam} />
         ) : (
           <Box>
