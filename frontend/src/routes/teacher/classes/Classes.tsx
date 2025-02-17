@@ -7,9 +7,10 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { config } from "../../../config";
 import { useFetch } from "../../../lib/useFetch";
-
 export const Classes: React.FC = () => {
   const [classes, setClasses] = React.useState<string[]>([]);
+  const [allClasses, setAllClasses] = React.useState<string[]>([]);
+
   const fetch = useFetch();
 
   React.useEffect(() => {
@@ -19,6 +20,21 @@ export const Classes: React.FC = () => {
       .catch(console.error);
   }, []);
 
+  const handleDeleteClass = (teacherClass: string) => {
+    fetch(`${config.API_BASEPATH}/classes/get-all-names`)
+      .then((res) => res?.json())
+      .then(setAllClasses)
+      .catch(console.error);
+
+    console.log(allClasses);
+
+    fetch(`${config.API_BASEPATH}/classes/${teacherClass}`, {
+      method: "DELETE",
+    })
+      .then((res) => res?.json())
+      .catch(console.error);
+  };
+
   return (
     <>
       <Stack direction="row" justifyContent="space-between">
@@ -27,22 +43,38 @@ export const Classes: React.FC = () => {
       <Table aria-label="basic table">
         <thead>
           <tr>
-            <th>Classe</th>
-            <th>Azioni</th>
+            <th colSpan={2}>Classe</th>
+            <th colSpan={3} style={{ textAlign: "center" }}>
+              Azioni
+            </th>
           </tr>
         </thead>
         <tbody>
           {classes.map((teacherClass) => (
             <tr key={teacherClass}>
-              <td style={{ width: "60%" }}>
+              <td colSpan={2}>
                 <Typography level="h3">{teacherClass}</Typography>
               </td>
-              <td>
+              <td style={{ textAlign: "center" }} colSpan={3}>
                 <Button
+                  style={{ marginRight: "5%" }}
                   component={Link}
                   to={`/teacher/classes/${teacherClass}`}
                 >
                   Visualizza studenti
+                </Button>
+                <Button
+                  style={{ marginRight: "5%" }}
+                  onClick={() => handleDeleteClass(teacherClass)}
+                >
+                  elimina classe
+                </Button>
+                <Button
+                  style={{ marginRight: "5%" }}
+                  component={Link}
+                  to={`/teacher/classes/${teacherClass}`}
+                >
+                  modifica classe
                 </Button>
               </td>
             </tr>
